@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - DutyLog</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fonts & Colors */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #375583;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            font-family: 'Courier New';
+        }
+
+        .navbar .logo-text:hover {
+            color: #007bff;
+        }
+
+        .navbar .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        .navbar ul li {
+            margin-right: 20px;
+        }
+
+        .navbar ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #1965d6;
+        }
+
+        /* Mobile Menu */
+        @media screen and (max-width: 768px) {
+            .navbar .menu-toggle {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #333;
+                padding: 20px;
+                box-sizing: border-box;
+                z-index: 999;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #375583;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        /* Hero Section with Parallax Effect */
+        .hero {
+            position: relative;
+            background-image: url('./images/building.jpg');
+            background-color: #375583;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            color: white;
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            margin-top: 10px;
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Side-by-Side Layout */
+        .side-by-side {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px 0;
+            background-color: transparent;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Overlay for Side-by-Side Sections */
+        .side-by-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(135 135 135 / 50%);
+            z-index: 0;
+        }
+
+        /* Individual Sections */
+        .side-by-side .mission,
+        .side-by-side .benefits {
+            position: relative;
+            flex: 1;
+            margin: 0 20px;
+            padding: 20px;
+            z-index: 1;
+            color: white;
+        }
+
+        /* Add a vertical line between the sections */
+        .side-by-side .mission {
+            border-right: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .side-by-side .benefits {
+            padding-left: 20px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .side-by-side {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .side-by-side .mission,
+            .side-by-side .benefits {
+                border-right: none;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Our Story */
+        .our-story {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 40px 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .social-icons a:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Call to Action */
+        .call-to-action {
+            padding: 40px 0;
+            text-align: center;
+            background-color:whitesmoke;
+            color: #375583;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .call-to-action h2 {
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background-color: #375583;
+            padding: 12px 24px;
+            color: white;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #375583;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: white;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><img src="./images/GCAA.png" alt="DutyLog Logo"></a>
+            <a href="index.html" class="logo-text">DutyLog</a>
+        </div>
+        <div class="menu-toggle">&#9776;</div>
+        <ul class="menu">
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="Admin login.html">Log In</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Let Your Effort Be Recognized</h1>
+            <p>Clock in. Clock out. Make every second count.</p>
+        </div>
+    </section>
+
+    <!-- Mission and Benefits -->
+    <section class="side-by-side container">
+        <div class="mission" id="mission">
+            <h2>Our Mission</h2>
+            <p>At DutyLog, our mission is to empower corporate teams and individuals to work smarter, not harder. We are committed to creating a platform that supports productivity and recognizes the effort of every team member. By tracking time accurately and fairly, we aim to foster a culture of accountability and respect, ensuring that every minute worked is acknowledged and valued.</p>
+            <p>We strive to foster an environment where overtime is recognized, punctuality is rewarded, and every employee feels appreciated for their contributions. Our goal is to enhance workplace efficiency while promoting a balanced work-life dynamic.</p>
+        </div>
+        <div class="benefits" id="benefits">
+            <h2>Benefits</h2>
+            <ul>
+                <li><strong>Enhanced Productivity</strong>: Optimize workflow by accurately logging time and identifying areas for improvement.</li>
+                <li><strong>Improved Time Management</strong>: Get insights into how time is spent and make informed decisions to improve efficiency.</li>
+                <li><strong>Work-Life Balance</strong>: Ensure that employees aren't overworked by monitoring and managing overtime effectively.</li>
+                <li><strong>Fair Compensation</strong>: Recognize and compensate overtime accurately to maintain fairness and transparency.</li>
+                <li><strong>Motivation and Morale</strong>: By acknowledging employees' time and effort, you can boost motivation and improve overall morale.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="our-story container" id="story">
+        <h2>Our Story</h2>
+        <p>Born out of the need to tackle the growing problem of unrecognized overtime and poor time management, DutyLog began as a small idea in a corporate office. As we watched colleagues struggle to keep track of their hours and go unrecognized for their extra effort, we saw the impact it had on morale and overall productivity. We knew there had to be a better way.</p>
+        <p>Our goal was simple: create a platform that not only tracks time but also helps employees feel seen and appreciated. Since our inception, we've grown into a tool used by numerous organizations, helping them foster a more positive, productive work environment. We are proud of our roots, and we are even prouder of the impact DutyLog is making on workplaces around the world.</p>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team container" id="team">
+        <h2>Meet the Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="./photo_2024-05-23_17-55-10.jpg" alt="John Doe">
+                <h3>John Doe</h3>
+                <p>Co-Founder & CEO</p>
+                <div class="social-icons">
+                    <a href="#"><img src="./images/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./images/x-icon.png" alt="X"></a>
+                    <a href="#"><img src="./images/linkedin-icon.png" alt="LinkedIn"></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="./photo_2024-05-23_17-55-10.jpg" alt="Jane Smith">
+                <h3>Jane Smith</h3>
+                <p>Chief Technology Officer</p>
+                <div class="social-icons"><a href="#"><img src="./images/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./images/x-icon.png" alt="X"></a>
+                    <a href="#"><img src="./images/linkedin-icon.png" alt="LinkedIn"></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="./mr.fun.jpg" alt="Michael Lee">
+                <h3>Michael Lee</h3>
+                <p>Lead Developer</p>
+                <div class="social-icons"><a href="#"><img src="./images/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#"><img src="./images/x-icon.png" alt="X"></a>
+                    <a href="#"><img src="./images/linkedin-icon.png" alt="LinkedIn"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="call-to-action" id="cta">
+        <h2>Clock into  DutyLog Today</h2>
+        <p>Start improving your productivity and ensure your efforts are recognized!</p>
+        <a href="index.html" class="cta-button">Get Started</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 DutyLog. All Rights Reserved.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Menu for Mobile View
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // Carousel Functionality (Simple)
+        let currentIndex = 0;
+        const slides = document.querySelector('.carousel-slides');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+
+        function updateCarousel(index) {
+            slides.style.transform = `translateX(-${index * 100}%)`;
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+            });
+        }
+
+        indicators.forEach((indicator, i) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = i;
+                updateCarousel(currentIndex);
+            });
+        });
+
+        // Auto-Slide Carousel (optional)
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % indicators.length;
+            updateCarousel(currentIndex);
+        }, 5000); // 5 seconds interval
+    </script>
+</body>
+
+</html>
