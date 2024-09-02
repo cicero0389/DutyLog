@@ -1,2 +1,3 @@
 "# DutyLog" 
-Currently working on the admin section 
+Currently dome with  the admin section 
+but project on hold 
