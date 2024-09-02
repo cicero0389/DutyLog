@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>GCAA Tech Support</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,700&display=swap" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/responsive.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('./images/building.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #375583;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            font-family: 'Courier New';
+        }
+
+        .navbar .logo-text:hover {
+            color: #007bff;
+        }
+
+        .navbar .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-right: 20px;
+        }
+
+        .navbar ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #1965d6;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar .menu-toggle {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #375583;
+                padding: 20px;
+                box-sizing: border-box;
+                z-index: 999;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+        }
+
+        .container {
+            width: 100%;
+            height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 70px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        p {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #dde1ec;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #000;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-input {
+            margin-bottom: 15px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-textarea {
+            height: 100px;
+        }
+
+        .form-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="./images/GCAA.png" alt="Dutylog"></a>
+                <a href="index.html" class="logo-text">Dutylog</a>
+            </div>
+            <div class="menu-toggle">&#9776;</div>
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="Admin login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Let's make today productive and impactful!!</h1>
+        <p id="homepageMessage">Loading messages...</p>
+        <a href="#" class="button" id="openModal">Get Started</a>
+    </div>
+    
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Let Your Presence Be Recognized</h2>
+            <form id="contactForm" action="connect.php" method="post">
+                <input type="text" name="Name" placeholder="Your Name" class="form-input" required>
+                <input type="text" name="Department" placeholder="Your Department" class="form-input" required>
+                <input type="text" name="DepartmentID" placeholder="Your Department ID" class="form-input" required>
+                
+                <label for="actionType">Action:</label>
+                <select name="actionType" id="actionType" class="form-input" required>
+                    <option value="clockIn">Clock In</option>
+                    <option value="clockOut">Clock Out</option>
+                </select>
+                
+                <button type="submit" class="form-button">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementsByClassName("close")[0];
+        var homepageMessage = document.getElementById("homepageMessage");
+        var messages = ["Remember to clock in for the day!", "Don't forget to clock out at the end of the day!"];
+        var messageIndex = 0;
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            var jsonData = {};
+            formData.forEach(function(value, key) {
+                jsonData[key] = value;
+            });
+
+            var jsonString = JSON.stringify(jsonData);
+            console.log(jsonString);
+            alert("Form submitted successfully!");
+            modal.style.display = "none";
+        });
+
+        function updateHomepageMessage() {
+            homepageMessage.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+        }
+
+        setInterval(updateHomepageMessage, 30000);
+        updateHomepageMessage();
+
+        // JavaScript for mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('ul.menu').classList.toggle('active');
+        });
+    </script>
+
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+</body>
+</html>
